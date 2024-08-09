@@ -7,7 +7,7 @@ import gridfs
 from io import BytesIO
 from bson import ObjectId
 
-client = MongoClient('mongodb://DBadmin:12345678@docdb-2024-08-09-04-53-35.cluster-cn8awsem072u.ap-northeast-2.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false')
+client = MongoClient('mongodb://project:12345678@docdb-2024-08-09-01-45-16.cluster-cn0y60kek5cj.ap-northeast-2.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false')
 db = client['test']  # 사용할 데이터베이스 선택
 users_collection = db['users']  # 사용할 컬렉션 선택
 production = db['production']
@@ -138,7 +138,7 @@ def cart():
             if product:
                 total_price += int(product["price"]) * int(cart["quantity"])
 
-    return render_template("cart.html", carts_list = carts_list, total_price = total_price)
+        return render_template("cart.html", carts_list = carts_list, total_price = total_price)
 
 
 @app.route('/product/<product_id>', methods=["GET", "POST"])
