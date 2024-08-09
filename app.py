@@ -138,7 +138,7 @@ def cart():
             if product:
                 total_price += int(product["price"]) * int(cart["quantity"])
 
-        return render_template("cart.html", carts_list = carts_list, total_price = total_price)
+    return render_template("cart.html", carts_list = carts_list, total_price = total_price)
 
 
 @app.route('/product/<product_id>', methods=["GET", "POST"])
