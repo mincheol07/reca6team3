@@ -7,7 +7,7 @@ import gridfs
 from io import BytesIO
 from bson import ObjectId
 
-client = MongoClient('mongodb://test:12345678@docdb-2024-08-09-00-13-49.cluster-cn0y60kek5cj.ap-northeast-2.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false')
+client = MongoClient('mongodb://test:12345678@docdb-2024-08-09-00-55-00.cluster-cn0y60kek5cj.ap-northeast-2.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false')
 db = client['test']  # 사용할 데이터베이스 선택
 users_collection = db['users']  # 사용할 컬렉션 선택
 production = db['production']
