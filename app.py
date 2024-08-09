@@ -1,6 +1,5 @@
 from flask import Flask, redirect, render_template, request, session, jsonify, flash, url_for, send_file
 from flask_session import Session
-from redis import Redis
 from werkzeug.security import check_password_hash, generate_password_hash
 from pymongo import MongoClient
 import certifi  # SSL 인증서 검증을 위한 모듈
@@ -24,7 +23,7 @@ app.config["SESSION_TYPE"] = "redis"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_REDIS"] = Redis(
-    host='clustercfg.project-sessiondb.8mu8au.memorydb.ap-northeast-2.amazonaws.com:6379',  # Private Subnet에 있는 Redis 엔드포인트
+    host='clustercfg.project-sessiondb.8mu8au.memorydb.ap-northeast-2.amazonaws.com',  # Private Subnet에 있는 Redis 엔드포인트
     port=6379,  # Redis 기본 포트
     password=None,  # 필요시 비밀번호 설정
     ssl=True  # ElastiCache를 사용하는 경우 필요할 수 있음
