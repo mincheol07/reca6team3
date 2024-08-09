@@ -4,6 +4,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from pymongo import MongoClient
 import certifi  # SSL 인증서 검증을 위한 모듈
 import gridfs
+from redis import Redis
 from io import BytesIO
 from bson import ObjectId
 
