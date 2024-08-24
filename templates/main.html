@@ -16,15 +16,15 @@
                     <a href="/logout" id="logout">로그아웃</a> |
                     <a href="/cart">장바구니</a> |
                     <a href="/register_product">상품등록</a>
-                {% else %}
+                {% elif session["user_info"].get("customer_type") == "buyer" %}
                     <a href="/logout" id="logout">로그아웃</a> |
                     <a href="/cart">장바구니</a> |
-                    <a href="/register_product">마이페이지</a>
+                    <a href="/mypape">마이페이지</a>
                 {% endif %}
-            {% else %}
-                <a href="/register">회원가입</a> |
-                <a href="/login">로그인</a>
-            {% endif %}
+                {% else %}
+                    <a href="/register">회원가입</a> |
+                    <a href="/login">로그인</a>
+                {% endif %}
             </ul>
         </div>
     </header>

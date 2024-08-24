@@ -8,7 +8,7 @@ from redis import Redis
 from io import BytesIO
 from bson import ObjectId
 
-client = MongoClient('mongodb://DBadmin:12345678@docdb-2024-08-09-04-53-35.cluster-cn8awsem072u.ap-northeast-2.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false')
+client = MongoClient('mongodb://AdminDB:12345678@fp-documentdb-cluster.cluster-cn0y60kek5cj.ap-northeast-2.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false')
 db = client['test']  # 사용할 데이터베이스 선택
 users_collection = db['users']  # 사용할 컬렉션 선택
 production = db['production']
@@ -20,15 +20,22 @@ fs = gridfs.GridFS(db) # gridfs를 이용하여 image 저장할 콜렉션 지정
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "ABCD"
 
+'''
+# 레디스 사용
 app.config["SESSION_TYPE"] = "redis"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_REDIS"] = Redis(
-    host='clustercfg.project-sessiondb.8mu8au.memorydb.ap-northeast-2.amazonaws.com',  # Private Subnet에 있는 Redis 엔드포인트
+    host='192.168.133.191',  # Private Subnet에 있는 Redis 엔드포인트
     port=6379,  # Redis 기본 포트
-    password=None,  # 필요시 비밀번호 설정
-    ssl=True  # ElastiCache를 사용하는 경우 필요할 수 있음
+    decode_responses=False
 )
+'''
+
+# 파일시스템 사용
+app.config["SESSION_TYPE"] = "filesystem"
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_USE_SIGNER"] = True
 Session(app)
 
 @app.after_request
@@ -248,6 +255,10 @@ def pay():
 
 
         return redirect ("/")
+    
+@app.route("/mypage", methods = ["GET"])
+def mypage():
+    return render_template("mypage.html")
     
 
 
